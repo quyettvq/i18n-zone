@@ -1,6 +1,6 @@
 # JavaScript i18n module
 
-**i18n-zone**
+**#i18n-zone**
 
 [![NPM version][npm-image]][npm-url]
 
