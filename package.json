@@ -4,7 +4,7 @@
   "description": "Internationalization module for JavaScript",
   "main": "index.js",
   "scripts": {
-    "start": "echo Only support browser environment",
+    "start": "node index.js",
     "test": "node bin/jest",
     "build": "node bin/webpack && node bin/webpack --min",
     "watch": "node bin/webpack --watch"
