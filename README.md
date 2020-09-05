@@ -97,8 +97,8 @@ settings.setNumberFormatter(formatNumber);
 translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 100000});
 // -> There are 100,000 dog.
 
-translate('That car costs :price dollars', {price: 55000});
-// -> That car costs 55,000 dollars
+translate('That car costs :price USD', {price: 55000});
+// -> That car costs 55,000 USD
 
 // Use string if you don't want to format
 translate('This year is :year', {year: '2014'});
