@@ -135,3 +135,5 @@ runtimeValidator.validateResources();
 // Has errors:
 // -> {'vi': {'message ID': ['error 1', 'error 2']}}
 ```
+## Interfaces
+[Link to interfaces](https://github.com/quyettvq/i18n-zone/tree/master/interfaces)
