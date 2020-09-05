@@ -23,7 +23,7 @@ npm install i18n-zone
 ```
 
 `en.json`
-```
+```json
 {
     "there_are_some_dogs{numOfDogs}": "There :numOfDogs(PLURAL, 1 is one dog, ! are :@ dogs)."
 }
