@@ -116,7 +116,7 @@ translate('Hi :police, [:criminal] has been [[escaped]]', {police: 'Jame', crimi
 translate('Hi :police, :criminal has been [arrested]', {police: 'Jame', criminal: 'Billy'});
 // -> Hi Jame, Billy has been arrested
 
-// if no params, raw message will be returned
+// if no params passed, raw message will be returned
 translate(':nothing will be [escaped] if no params');
 // -> :nothing will be [escaped] if no params
 

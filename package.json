@@ -24,7 +24,7 @@
     "js pluralization"
   ],
   "author": "Tran Van Quyet <quyettvq@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/quyettvq/i18n-zone/issues"
   },
