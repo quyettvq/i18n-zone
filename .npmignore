@@ -1,3 +1,4 @@
+.gitignore
 bin
 demo
 node_modules
