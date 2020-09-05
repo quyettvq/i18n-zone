@@ -1,6 +1,6 @@
-# I18n Zone
+# I18n module for JavaScript
 
-**A lightweight i18n module for JavaScript.**
+***i18n-zone**: A module with the simple and clear syntax, supports internationalization in projects using JavaScript. Main features: translating, number formatting, pluralization, syntax-escaping.*
 
 [![NPM version][npm-image]][npm-url]
 
@@ -124,12 +124,12 @@ translate(':nothing will be [escaped] if no params');
 translate('There :count(PLURAL, 1 is one comment, >=100 are :@ comments[,] awesome!, ! are :@ comments)', {count: 100});
 // -> There are 100 comments, awesome!
 ```
-## Runtime validator
+## Validator
 
 ```javascript
-const {runtimeValidator} from 'i18n-zone';
+const {validator} from 'i18n-zone';
 
-runtimeValidator.validateResources();
+validator.validateResources();
 // No errors:
 // -> null
 // Has errors:

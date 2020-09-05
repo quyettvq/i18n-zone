@@ -8,7 +8,7 @@ i18n.settings.setResource('vi', require('./resources/vi.json'));
 i18n.settings.setNumberFormatter((number, locale, options) => formatNumberLocalized(number, null, locale));
 
 console.log('validate resources:');
-console.log(i18n.runtimeValidator.validateResources());
+console.log(i18n.validator.validateResources());
 
 i18n.settings.setLocale('vi');
 

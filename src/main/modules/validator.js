@@ -132,7 +132,7 @@ function getParamNamesFromVariableStyleId(id) {
         return [];
     }
 
-    return matches[1].split(',');
+    return paramNames.split(',');
 }
 
 export {

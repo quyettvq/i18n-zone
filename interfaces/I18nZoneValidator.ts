@@ -1,3 +1,3 @@
-export interface I18nZoneRuntimeValidator {
+export interface I18nZoneValidator {
   validateResources(): null|{[locale: string]: {[id: string]: string[]}}
 }

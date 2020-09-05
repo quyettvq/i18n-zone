@@ -1,4 +1,4 @@
 {
-  "choosing_number_of_days{numOfDays}": "Đang chọn: ::numOfDays ngày",
-  "choosing_number_of_days_preset{numOfDays,presetName}": "Đang chọn: ::numOfDays ngày (::presetName)"
+  "choosing_number_of_days{numOfDays}": "Đang chọn: :numOfDays ngày",
+  "choosing_number_of_days_preset{numOfDays,presetName}": "Đang chọn: :numOfDays ngày (:presetName)"
 }

@@ -1,4 +1,4 @@
 {
-  "choosing_number_of_days{numOfDays}": "Choosing ::numOfDays(PLURAL, 1 one day, ! :@ days)",
-  "choosing_number_of_days_preset{numOfDays,presetName}": "Choosing ::numOfDays(PLURAL, 1 one day, ! :@ days) (::presetName)"
+  "choosing_number_of_days{numOfDays}": "Choosing :numOfDays(PLURAL, 1 one day, ! :@ days)",
+  "choosing_number_of_days_preset{numOfDays,presetName}": "Choosing :numOfDays(PLURAL, 1 one day, ! :@ days) (:presetName)"
 }
