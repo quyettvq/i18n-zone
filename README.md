@@ -38,7 +38,7 @@ settings.setLocale('vi');
 
 ```
 
-### Translate
+## Translate
 ```javascript
 const {translate} = require('i18n-zone');
 
@@ -62,19 +62,35 @@ settings.setLocale('en');
 translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 1});
 // -> There is one dog.
 
-// numbers will be formatted
-translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 10000});
-// -> There are 100,000 dog.
 
+
+
+```
+## Number formatter
+```
 // change the way to format number
-const formatNumber = (number, locale, options) => {
+
+/**
+ * @return {string} formatted number
+ */
+const formatNumber = (number, locale) => {
     // your code goes here
-    // by default, Number.prototype.toLocaleString is used
+    // by default, Number.prototype.toLocaleString is used:
     
-    return formattedNumber;
+    // return Number(number).toLocaleString(locale);
 }
 
 settings.setNumberFormatter(formatNumber);
 
+
+translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 10000});
+// -> There are 100,000 dog.
+
+translate('That car costs :price dollars', {price: 55000});
+// -> That car costs 55,000 dollars
+
+// Use string if you don't want to format
+translate('This year is :year', {year: '2014'});
+// -> This year is 2014
 ```
 
