@@ -1,4 +1,4 @@
-# JavaScript i18n
+# JavaScript I18n (i18n-zone)
 
 A lightweight translation module for JavaScript.
 
