@@ -13,16 +13,14 @@ npm install i18n-zone
 {
     "What is your name?": "Tên bạn là gì?",
     "My name is :myName.": "Tên tôi là :myName.",
-    "there_are_some_dogs{numOfDogs}": "Có :numOfDogs con chó.",
-    "This is [:escaped] text"
+    "there_are_some_dogs{numOfDogs}": "Có :numOfDogs con chó."
 }
 ```
 
 `en.json`
 ```
 {
-    "there_are_some_dogs{numOfDogs}": "There :numOfDogs(PLURAL, 1 is one dog, ! are :@ dogs).",
-    "This is [:escaped] text"
+    "there_are_some_dogs{numOfDogs}": "There :numOfDogs(PLURAL, 1 is one dog, ! are :@ dogs)."
 }
 ```
 
@@ -75,9 +73,8 @@ translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 1});
  */
 const formatNumber = (number, locale) => {
     // your code goes here
-    // by default, Number.prototype.toLocaleString is used:
-    
-    // return Number(number).toLocaleString(locale);
+    // by default, Number.prototype.toLocaleString is used
+    return Number(number).toLocaleString(locale);
 }
 
 settings.setNumberFormatter(formatNumber);
@@ -94,3 +91,15 @@ translate('This year is :year', {year: '2014'});
 // -> This year is 2014
 ```
 
+## Escaping
+```javascript
+translate('Hi :police, [:criminal] has been [[escaped]]', {police: 'Jame', criminal: 'Billy'});
+// -> Hi Jame, :criminal has been [escaped]
+
+translate('Hi :police, :criminal has been [arrested]', {police: 'Jame', criminal: 'Billy'});
+// -> Hi Jame, Billy has been arrested
+
+// if no params, raw message will be returned
+translate(':nothing will be [escaped] if no params');
+// -> :nothing will be [escaped] if no params
+```
