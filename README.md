@@ -94,7 +94,7 @@ settings.setNumberFormatter(formatNumber);
 ```
 
 ```javascript
-translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 10000});
+translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 100000});
 // -> There are 100,000 dog.
 
 translate('That car costs :price dollars', {price: 55000});
