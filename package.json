@@ -1,6 +1,6 @@
 {
   "name": "i18n-zone",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Internationalization module for JavaScript",
   "main": "index.js",
   "scripts": {
@@ -14,9 +14,14 @@
     "url": "git+https://github.com/quyettvq/i18n-zone.git"
   },
   "keywords": [
-    "javascript",
     "i18n",
-    "translate"
+    "javascript i18n",
+    "i18n javascript",
+    "i18n js",
+    "pluralization",
+    "javascript pluralization",
+    "pluralization javascript",
+    "js pluralization"
   ],
   "author": "Tran Van Quyet <quyettvq@gmail.com>",
   "license": "ISC",

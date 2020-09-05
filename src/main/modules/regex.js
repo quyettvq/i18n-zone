@@ -33,7 +33,7 @@ function createEscapeRegex() {
  * https://regex101.com/r/2QkEEc/15
  */
 function createMessageParamRegex() {
-    return /(::)([a-zA-Z_][a-zA-Z0-9_]*)(?:(\(\s*([A-Z]+)\s*)(|,.+?)\))?/g;
+    return /(:)([a-zA-Z_][a-zA-Z0-9_]*)(?:(\(\s*([A-Z]+)\s*)(|,.+?)\))?/g;
 }
 
 /**
