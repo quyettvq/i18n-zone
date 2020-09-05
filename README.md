@@ -2,6 +2,11 @@
 
 A lightweigt translation module for JavaScript.
 
+[![NPM version][npm-image]][npm-url]
+
+[npm-image]: https://badge.fury.io/js/i18n-zone.svg
+[npm-url]: https://www.npmjs.com/package/i18n-zone
+
 ## Install
 ```bash
 npm install i18n-zone
