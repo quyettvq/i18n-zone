@@ -1,4 +1,4 @@
-# I18n Zone
+# JavaScript i18n module
 
 **A lightweight i18n module for JavaScript.**
 
