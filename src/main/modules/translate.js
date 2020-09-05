@@ -1,5 +1,5 @@
 import {getLocale, getResource, getNumberFormatter} from "./settings";
-import logTranslationMissing from "./logTranslationMissing";
+import {logResourceNotFound, logTranslationNotFound} from "./log";
 import {
     createEscapeRegex,
     createMessageParamRegex,
@@ -23,11 +23,19 @@ function translate(id, params = null, locale = getLocale()) {
 }
 
 function getMessage(id, locale) {
-    if (getResource(locale).hasOwnProperty(id)) {
-        return getResource(locale)[id];
-    }
+    const resource = getResource(locale);
 
-    logTranslationMissing(id, locale);
+    try {
+        if (resource.hasOwnProperty(id)) {
+            return resource[id];
+        }
+
+        logTranslationNotFound(id, locale);
+
+    } catch (error) {
+
+        logResourceNotFound(locale);
+    }
 
     return id;
 }
