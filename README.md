@@ -46,6 +46,11 @@ translate('What is your name?');
 translate('My name is :myName.', {myName: 'Quyết'});
 // -> Tên tôi là Quyết.
 
+```
+
+## Pluralization
+
+```javascript
 translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 10});
 // -> Có 10 con chó
 
@@ -60,11 +65,14 @@ settings.setLocale('en');
 translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 1});
 // -> There is one dog.
 
-
-
-
+// more variants
+// use wildcard :@ to insert value into variant
+translate('There :count(PLURAL, 0 are no comments, 1 is one comment, <10 are some comments, <=100 are :@ comments, ! are a lot of comments)', {count: 50});
+// -> There are 10 comments.
 ```
+
 ## Number formatter
+
 ```javascript
 // change the way to format number
 
@@ -79,6 +87,7 @@ const formatNumber = (number, locale) => {
 
 settings.setNumberFormatter(formatNumber);
 ```
+
 ```javascript
 translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 10000});
 // -> There are 100,000 dog.
@@ -92,6 +101,7 @@ translate('This year is :year', {year: '2014'});
 ```
 
 ## Escaping
+
 ```javascript
 translate('Hi :police, [:criminal] has been [[escaped]]', {police: 'Jame', criminal: 'Billy'});
 // -> Hi Jame, :criminal has been [escaped]
@@ -102,4 +112,8 @@ translate('Hi :police, :criminal has been [arrested]', {police: 'Jame', criminal
 // if no params, raw message will be returned
 translate(':nothing will be [escaped] if no params');
 // -> :nothing will be [escaped] if no params
+
+// escaping in variants
+translate('There :count(PLURAL, 1 is one comment, >=100 are :@ comments[,] awesome!, ! are :@ comments)', {count: 100});
+// -> There are 100 comments, awesome!
 ```
