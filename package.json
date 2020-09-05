@@ -1,0 +1,34 @@
+{
+  "name": "i18n-uc",
+  "version": "1.0.0",
+  "description": "I18N module for JavaScript",
+  "main": "index.js",
+  "scripts": {
+    "start": "echo Only support browser environment",
+    "test": "node bin/jest",
+    "build": "node bin/webpack && node bin/webpack --min",
+    "watch": "node bin/webpack --watch",
+    "postinstall": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/quyettvq/javascript-i18n.git"
+  },
+  "keywords": [
+    "javascript",
+    "i18n",
+    "translate"
+  ],
+  "author": "Tran Van Quyet <quyettvq@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/quyettvq/javascript-i18n/issues"
+  },
+  "homepage": "https://github.com/quyettvq/javascript-i18n#readme",
+  "devDependencies": {
+    "fs": "0.0.1-security",
+    "jest": "^26.0.1",
+    "path": "^0.12.7",
+    "webpack": "^4.43.0"
+  }
+}
