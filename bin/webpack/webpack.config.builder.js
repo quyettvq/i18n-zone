@@ -18,8 +18,9 @@ function buildConfig(mode = 'development') {
         },
         output: {
             path: bundlesDir,
-            library: 'i18n',
-            filename: `[name].${ext}`
+            library: 'i18nZone',
+            filename: `[name].${ext}`,
+            libraryTarget: 'commonjs2'
         },
         optimization: {
             minimize: useMinify,

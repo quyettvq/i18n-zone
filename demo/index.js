@@ -1,22 +1,18 @@
 const fs = require('fs');
 const path = require('path');
 
-const libCode = fs.readFileSync(path.resolve(__dirname, '../../dist/lib.min.js'));
-const libName = 'i18n';
-
-const i18n = new Function(`${libCode}; return ${libName};`)();
+const i18n = require('../index.js');
 
 i18n.settings.setResource('en', require('./resources/en.json'));
 i18n.settings.setResource('vi', require('./resources/vi.json'));
 i18n.settings.setNumberFormatter((number, locale, options) => formatNumberLocalized(number, null, locale));
 
+console.log('validate resources:');
 console.log(i18n.runtimeValidator.validateResources());
 
 i18n.settings.setLocale('vi');
 
-console.time('translate');
 console.log(i18n.translate('choosing_number_of_days{numOfDays}', {numOfDays: 120000000000}));
-console.timeEnd('translate');
 
 
 function formatNumber(number, n, s, c) {
