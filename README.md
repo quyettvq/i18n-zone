@@ -72,7 +72,7 @@ translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 1});
 
 // more variants
 // use wildcard :@ to insert value into variant
-translate('There :count(PLURAL, 0 are no comments, 1 is one comment, <10 are some comments, <=100 are :@ comments, ! are a lot of comments)', {count: 50});
+translate('There :count(PLURAL, 0 are no comments, 1 is one comment, <10 are some comments, <=100 are :@ comments, ! are a lot of comments)', {count: 10});
 // -> There are 10 comments.
 ```
 
