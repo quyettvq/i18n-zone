@@ -1,6 +1,6 @@
 # JavaScript i18n module
 
-**A lightweight i18n module for JavaScript.**
+**i18n-zone**
 
 [![NPM version][npm-image]][npm-url]
 
