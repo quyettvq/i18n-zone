@@ -101,8 +101,8 @@ translate('That car costs :price USD', {price: 55000});
 // -> That car costs 55,000 USD
 
 // Use string if you don't want to format
-translate('This year is :year', {year: '2014'});
-// -> This year is 2014
+translate('This year is :year', {year: '2020'});
+// -> This year is 2020
 ```
 
 ## Escaping
