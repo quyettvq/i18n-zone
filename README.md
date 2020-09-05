@@ -102,6 +102,8 @@ translate('This year is :year', {year: '2014'});
 
 ## Escaping
 
+Place the text in square brackets to escape
+
 ```javascript
 translate('Hi :police, [:criminal] has been [[escaped]]', {police: 'Jame', criminal: 'Billy'});
 // -> Hi Jame, :criminal has been [escaped]
