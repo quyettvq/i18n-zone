@@ -67,7 +67,7 @@ translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 1});
 
 ```
 ## Number formatter
-```
+```javascript
 // change the way to format number
 
 /**
@@ -81,8 +81,8 @@ const formatNumber = (number, locale) => {
 }
 
 settings.setNumberFormatter(formatNumber);
-
-
+```
+```javascript
 translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 10000});
 // -> There are 100,000 dog.
 
