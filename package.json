@@ -1,5 +1,5 @@
 {
-  "name": "i18n-uc",
+  "name": "i18n-zone",
   "version": "1.0.0",
   "description": "I18N module for JavaScript",
   "main": "index.js",
