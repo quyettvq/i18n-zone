@@ -14,7 +14,7 @@ npm install i18n-zone
 const {settings} = require('i18n-zone');
 
 settings.setResource('vi', {'greeting': 'Xin chào!'});
-settings.setResource('en', {'greeting': 'Hello!'})
+settings.setResource('en', {'greeting': 'Hello!'});
 
 settings.setDefaultLocale('en');
 settings.setLocale('vi');
@@ -27,4 +27,9 @@ const {translate} = require('i18n-zone');
 
 translate('greeting');
 // -> Xin chào
+
+// current locale is 'vi'
+// but, we can force locale to be 'en'
+translate('greeting', null, 'en');
+// -> Hello!
 ```
