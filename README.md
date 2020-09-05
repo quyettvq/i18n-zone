@@ -1,7 +1,5 @@
 # JavaScript i18n module
 
-**#i18n-zone**
-
 [![NPM version][npm-image]][npm-url]
 
 [npm-image]: https://badge.fury.io/js/i18n-zone.svg
