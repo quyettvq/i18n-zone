@@ -1,6 +1,6 @@
 # i18n-zone
 
-A lightweigt translation module for JavaScript.
+A lightweight translation module for JavaScript.
 
 [![NPM version][npm-image]][npm-url]
 
