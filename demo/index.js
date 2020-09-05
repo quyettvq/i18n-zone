@@ -1,6 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
 const i18n = require('../index.js');
 
 i18n.settings.setResource('en', require('./resources/en.json'));
