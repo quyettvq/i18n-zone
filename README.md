@@ -119,3 +119,14 @@ translate(':nothing will be [escaped] if no params');
 translate('There :count(PLURAL, 1 is one comment, >=100 are :@ comments[,] awesome!, ! are :@ comments)', {count: 100});
 // -> There are 100 comments, awesome!
 ```
+## Runtime validator
+
+```javascript
+const {runtimeValidator} from 'i18n-zone';
+
+runtimeValidator.validateResources();
+// No errors:
+// -> null
+// Has errors:
+// -> {'vi': {'message ID': ['error 1', 'error 2']}}
+```
