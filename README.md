@@ -1,6 +1,6 @@
 # I18n module for JavaScript
 
-***i18n-zone**: A module with the simple and clear syntax, supports internationalization in projects using JavaScript. Main features: translating, number formatting, pluralization, syntax-escaping.*
+***i18n-zone**: A module with the simple and clear syntax, supports internationalization in projects using JavaScript. Main features: translating, number formatting, pluralization, selection.*
 
 [![NPM version][npm-image]][npm-url]
 
