@@ -4,6 +4,38 @@ import {
     createMessageParamRegex,
 } from './regex';
 
+const options = {
+    idShouldBeTrimmed: true, // boolean
+    messageShouldBeTrimmed: true, // boolean
+    idMaxLength: 100, // number | null
+    singleWordMessageMaxLength: 20, // number | null
+    idShouldReflectParams: true, // boolean
+};
+
+function logOptionNotExisted(name) {
+    console.error(`(i18n/validator) option not existed: ${name}`);
+}
+
+function setOption(name, value) {
+    if (options.hasOwnProperty(name)) {
+        options[name] = value;
+    } else {
+        logOptionNotExisted(name);
+    }
+}
+
+function setOptions(newOptions) {
+    for (let name in newOptions) {
+        if (newOptions.hasOwnProperty(name)) {
+            if (options.hasOwnProperty(name)) {
+                options[name] = newOptions[name];
+            } else {
+                logOptionNotExisted(name);
+            }
+        }
+    }
+}
+
 /**
  *
  * @return {{}|null}
@@ -46,60 +78,92 @@ function validateResources() {
 function validateIdAndMessage(id, msg) {
     const errors = [];
 
-    const isVariableStyleId = createVariableStyleIdRegex().test(id);
+    if (options.idShouldBeTrimmed) {
+        validate_idShouldBeTrimmed(errors, id);
+    }
 
-    // validate start and end white space
+    if (options.messageShouldBeTrimmed) {
+        validate_messageShouldBeTrimmed(errors, msg);
+    }
 
+    if (options.idMaxLength !== null) {
+        validate_idMaxLength(errors, id, options.idMaxLength);
+    }
+
+    if (options.singleWordMessageMaxLength !== null) {
+        validate_singleWordMessageMaxLength(errors, msg, options.singleWordMessageMaxLength);
+    }
+
+    if (options.idShouldReflectParams) {
+        validate_idShouldReflectParams(errors, id, msg);
+    }
+
+    return errors;
+}
+
+function validate_idShouldBeTrimmed(errors, id) {
     if (id.trim() !== id) {
-        errors.push(`ID should not start or end with white-space`);
+        errors.push(`IDs should not start or end with whitespaces`);
     }
+}
 
+function validate_messageShouldBeTrimmed(errors, msg) {
     if (msg.trim() !== msg) {
-        errors.push(`Message should not start or end with white-space`);
+        errors.push(`Messages should not start or end with whitespaces`);
     }
+}
 
-
-    // validate id max length
-
-    const maxValidIdLength = 99;
-    if (id.length > maxValidIdLength) {
-        if (isVariableStyleId) {
-            errors.push(`ID too long: ${id.length}. Expected <= ${maxValidIdLength}`);
+function validate_idMaxLength(errors, id, idMaxLength) {
+    if (id.length > idMaxLength) {
+        if (isVariableStyle(id)) {
+            errors.push(`ID too long: ${id.length}. Expected <= ${idMaxLength}`);
         } else {
-            errors.push(`ID too long: ${id.length}. Expected <= ${maxValidIdLength}. Please consider to use variable-style ID`);
+            errors.push(`ID too long: ${id.length}. Expected <= ${idMaxLength}. Please consider to use variable-style ID`);
         }
     }
+}
 
+function validate_singleWordMessageMaxLength(errors, msg, singleWordMessageMaxLength) {
+    if (msg.length <= singleWordMessageMaxLength) {
+        return;
+    }
+
+    if (/\s/.test(msg)) {
+        return;
+    }
 
     const msgParams = getParamNamesFromMessage(msg);
 
-
-    // validate message white-spacing
-
-    const maxSingleWordLength = 19;
-    if (msg.length > maxSingleWordLength && msgParams.length === 0 && !/\s/.test(msg)) {
-        errors.push(`Message should be a human-readable sentence/text which includes words instead of a "long word" without separating by white-space. Max length of a single-word message: ${maxSingleWordLength}`);
+    if (msgParams.length > 0) {
+        return;
     }
 
+    errors.push(`A message should be a human-readable sentence/text which includes words instead of being a "long word" without any whitespace. Max length of a single-word message: ${singleWordMessageMaxLength}`);
+}
 
-    // validate params
-    const idParams = isVariableStyleId ? getParamNamesFromVariableStyleId(id) : getParamNamesFromMessage(id);
+function validate_idShouldReflectParams(errors, id, msg) {
+    const idIsVariableStyle = isVariableStyle(id);
+    const msgParams = getParamNamesFromMessage(msg);
+    const idParams = idIsVariableStyle ? getParamNamesFromVariableStyleId(id) : getParamNamesFromMessage(id);
 
     if (msgParams.length === idParams.length) {
         for (let i = 0; i < idParams.length; i++) {
             if (idParams[i] !== msgParams[i]) {
-                errors.push(`Param at ${i} of ID and message is not the same: ${idParams[i]} vs ${msgParams[i]}`);
+                errors.push(`The param at ${i} of ID and message is not the same: ${idParams[i]} vs ${msgParams[i]}`);
             }
         }
-    } else {
-        if (isVariableStyleId && idParams.length === 0) {
-            errors.push(`Variable-style IDs need to end with a list of params which are the same used in the message if any. Syntax: an_awesome_id{meaningParam,greatParamAbc,numOfItems}. Note that white-spaces are not accepted`);
-        } else {
-            errors.push(`ID params length: ${idParams.length} is not equal to message params length: ${msgParams.length}`);
-        }
+        return;
     }
 
-    return errors;
+    if (idIsVariableStyle && idParams.length === 0) {
+        errors.push(`Variable-style IDs need to end with a list of params which are the same used in the message if any. Syntax: an_awesome_id{meaningParam,numOfDays}. Note that whitespaces are not accepted`);
+    } else {
+        errors.push(`ID params length: ${idParams.length} is not equal to message params length: ${msgParams.length}`);
+    }
+}
+
+function isVariableStyle(id) {
+    return createVariableStyleIdRegex().test(id);
 }
 
 function getParamNamesFromMessage(message) {
@@ -136,5 +200,7 @@ function getParamNamesFromVariableStyleId(id) {
 }
 
 export {
-    validateResources
+    validateResources,
+    setOption,
+    setOptions
 }
