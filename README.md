@@ -140,10 +140,91 @@ translate('Hello:gender(SELECT, *male* [ ]Mr., *female* [ ]Ms., [,]) :name!', {g
 const {validator} from 'i18n-zone';
 
 validator.validateResources();
-// No errors:
-// -> null
-// Has errors:
-// -> {'vi': {'message ID': ['error 1', 'error 2']}}
 ```
+
+If no errors found, returns:
+
+```javascript
+null
+```
+
+If has errors, returns an object contains errors correspond with each ID:
+
+```javascript
+{
+    "vi": {
+        "message_id": [
+            "error 1",
+            "error 2"
+        ]
+    }
+}
+```
+
+### Validator options:
+
+#### idShouldBeTrimmed
+
+Validate that IDs do not start or end with whitespaces
+
+Type: `boolean`
+
+Default: `true`
+
+```javascript
+validator.setOption('idShouldBeTrimmed', false);
+```
+
+#### messageShouldBeTrimmed
+
+Validate that messages do not start or end with whitespaces
+
+Type: `boolean`
+
+Default: `true`
+
+```javascript
+validator.setOption('messageShouldBeTrimmed', false);
+```
+
+#### idMaxLength
+
+Validate that IDs do not contains too many characters. Set `null` to disable.
+
+Type: `number|null`
+
+Default: `100`
+
+```javascript
+validator.setOption('idMaxLength', null);
+```
+
+#### singleWordMessageMaxLength
+
+Validate that single-word messages do not contains too many characters. Set `null` to disable.
+
+_(Single-word messages are messages contain only one word, no whitespaces between)._
+
+Type: `number|null`
+
+Default: `20`
+
+```javascript
+validator.setOption('singleWordMessageMaxLength', null);
+```
+
+#### idShouldReflectParams
+
+Validate that IDs reflect exactly the same params with corresponding messages.
+
+Type: `boolean`
+
+Default: `true`
+
+```javascript
+validator.setOption('idShouldReflectParams', false);
+```
+
+
 ## Interfaces
 [Link to interfaces](https://github.com/quyettvq/i18n-zone/tree/master/interfaces)
