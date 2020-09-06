@@ -105,6 +105,13 @@ translate('This year is :year', {year: '2020'});
 // -> This year is 2020
 ```
 
+## Selection
+
+```javascript
+translate('Hello :gender(SELECT, *male* Mr., *female* Ms.) :name!', {gender: 'male', name: 'Jame'});
+// -> Hello Mr. Jame!
+```
+
 ## Escaping
 
 Place the text in square brackets to escape
@@ -123,6 +130,9 @@ translate(':nothing will be [escaped] if no params');
 // escaping in variants
 translate('There :count(PLURAL, 1 is one comment, >=100 are :@ comments[,] awesome!, ! are :@ comments)', {count: 100});
 // -> There are 100 comments, awesome!
+
+translate('Hello:gender(SELECT, *male* [ ]Mr., *female* [ ]Ms., [,]) :name!', {gender: 'other', name: 'Jack'});
+// -> Hello, Jack!
 ```
 ## Validator
 
