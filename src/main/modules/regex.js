@@ -42,11 +42,11 @@ function createMessageParamRegex() {
  *
  *
  * Full match: a variant text
- * Groups: mixinBeforeVariant, operator?, comparedValue?, variant
+ * Groups: separator, mixinBeforeVariant, operator?, comparedValue?, variant
  * https://regex101.com/r/wyhpE5/6
  */
 function createVariationPluralRegex() {
-    return /(,\s*(?:(?:(|>=|<=|>|<)(\d+))|!)\s)([^,]+)/g;
+    return /(,)(\s*(?:(?:(|>=|<=|>|<)(\d+))|!)\s)([^,]*)/g;
 }
 
 /**
@@ -55,11 +55,11 @@ function createVariationPluralRegex() {
  *
  *
  * Full match: a variant text
- * Groups: mixinBeforeVariant, comparedValue?, variant
+ * Groups: separator, mixinBeforeVariant, mixinBeforeComparedValue?, comparedValue?, variant
  * https://regex101.com/r/wyhpE5/7
  */
 function createVariationSelectRegex() {
-    return /(,(?:\s*\*([^,]+)\*|)\s)([^,]+)/g;
+    return /(,)((?:(\s*\*)([^,]+)\*|)\s)([^,]*)/g;
 }
 
 /**

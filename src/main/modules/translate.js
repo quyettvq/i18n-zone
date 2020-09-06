@@ -20,6 +20,8 @@ function translate(id, params = null, locale = getLocale()) {
 
     const deparametrizedEscapedMessage = escapedDeparametrize(escapedMessage, escapedItems, params, id, locale);
 
+    // console.log(escapedItems);
+
     return unescapeMessage(deparametrizedEscapedMessage, escapedItems);
 }
 
@@ -49,13 +51,29 @@ function escapedDeparametrize(escapedMessage, escapedItems, params, id, locale) 
             mixinBeforeVariationText = '', variationType = '', variationText = '',
             fullMatchIndex
         ) => {
+            const variationTextRelativeIndex = (notation + paramName + mixinBeforeVariationText).length;
+            const variationTextIndex = fullMatchIndex + variationTextRelativeIndex;
+
+            const variationEscapedItems = escapedItems.filter(item => {
+                return (
+                    item.sliceIndex >= variationTextIndex &&
+                    item.sliceIndex < variationTextIndex + variationText.length
+                );
+            }).map(item => {
+                return {
+                    escapedSubtext: item.escapedSubtext,
+                    subtext: item.subtext,
+                    sliceIndex: item.sliceIndex - variationTextIndex,
+                    sliceIndexChange: 0,
+                    retainedInResult: true
+                };
+            });
+
             const variantResult = getParamVariantValue(
                 params[paramName], paramName,
                 variationType, variationText,
-                id, locale
+                variationEscapedItems, locale, id
             );
-
-            const variationTextRelativeIndex = (notation + paramName + mixinBeforeVariationText).length;
 
             updateSliceIndexesAfterReplaceOneMessageParamByValue(
                 escapedItems, fullMatchIndex, fullMatch.length,
@@ -192,31 +210,32 @@ function updateSliceIndexesAfterReplaceOneMessageParamByValue
  * @param {string} paramName
  * @param {string} variationType
  * @param {string} variationText
- * @param {string} id
+ * @param {object[]} variationEscapedItems
  * @param {string} locale
+ * @param {string} id
  * @return {*}
  */
-function getParamVariantValue(rawValue, paramName, variationType, variationText, id, locale) {
+function getParamVariantValue(rawValue, paramName, variationType, variationText, variationEscapedItems, locale, id) {
     if (rawValue === undefined) {
         console.error(`(i18n/translate) value for param: ${paramName} is not provided when translate message: ${id}`);
 
         return {value: paramName};
     }
 
-    if (rawValue instanceof Array) {
-        return getParamArrayValue(rawValue, locale);
+    if (variationType === 'PLURAL') {
+        return getParamPluralValue(rawValue, variationText, locale);
     }
 
     if (variationType === 'SELECT') {
-        return getParamSelectValue(rawValue, variationText, locale);
+        return getParamSelectValue(rawValue, variationText, variationEscapedItems);
     }
 
     if ('number' === typeof rawValue) {
-        if (variationType === 'PLURAL') {
-            return getParamPluralValue(rawValue, variationText, locale);
-        }
-
         return getParamNumberValue(rawValue, locale);
+    }
+
+    if (rawValue instanceof Array) {
+        return getParamArrayValue(rawValue, locale);
     }
 
     return {value: String(rawValue)};
@@ -231,23 +250,9 @@ function getParamNumberValue(rawValue, locale) {
 }
 
 function getParamPluralValue(rawValue, variationText, locale) {
-    const formattedValue = (getNumberFormatter())(rawValue, locale);
+    const rawNumber = Number(rawValue);
 
-    const toVariantValue = (variant) => {
-        const paramReplacements = [];
-
-        let value = variant.replace(createVariantParamRegex(), (paramMatch, paramMatchIndex) => {
-            paramReplacements.push({
-                index: paramMatchIndex,
-                oldLength: paramMatch.length,
-                newLength: formattedValue.length
-            });
-
-            return formattedValue;
-        });
-
-        return {value, paramReplacements};
-    };
+    const formattedValue = (getNumberFormatter())(rawNumber, locale);
 
     const regex = createVariationPluralRegex();
 
@@ -260,14 +265,14 @@ function getParamPluralValue(rawValue, variationText, locale) {
             break;
         }
 
-        const [_, mixinBeforeVariant, operator, comparedValue, variant] = match;
+        const [_, separator, mixinBeforeVariant, operator, comparedValue, variant] = match;
 
-        const variantIndex = match.index + mixinBeforeVariant.length;
+        const variantIndex = match.index + separator.length + mixinBeforeVariant.length;
         const variantLength = variant.length;
 
         if (comparedValue === undefined) {
             return {
-                ...toVariantValue(variant),
+                ...toVariantValue(variant, formattedValue),
                 origin: {
                     index: variantIndex,
                     length: variantLength
@@ -275,7 +280,6 @@ function getParamPluralValue(rawValue, variationText, locale) {
             };
         }
 
-        const rawNumber = Number(rawValue);
         const comparedNumber = Number(comparedValue);
 
         let passed = (
@@ -288,7 +292,7 @@ function getParamPluralValue(rawValue, variationText, locale) {
 
         if (passed) {
             return {
-                ...toVariantValue(variant),
+                ...toVariantValue(variant, formattedValue),
                 origin: {
                     index: variantIndex,
                     length: variantLength
@@ -301,24 +305,10 @@ function getParamPluralValue(rawValue, variationText, locale) {
     return {value: formattedValue};
 }
 
-function getParamSelectValue(rawValue, variationText, locale) {
-    const formattedValue = rawValue;
+function getParamSelectValue(rawValue, variationText, variationEscapedItems) {
+    const rawString = '' + rawValue;
 
-    const toVariantValue = (variant) => {
-        const paramReplacements = [];
-
-        let value = variant.replace(createVariantParamRegex(), (paramMatch, paramMatchIndex) => {
-            paramReplacements.push({
-                index: paramMatchIndex,
-                oldLength: paramMatch.length,
-                newLength: formattedValue.length
-            });
-
-            return formattedValue;
-        });
-
-        return {value, paramReplacements};
-    };
+    const formattedValue = rawString;
 
     const regex = createVariationSelectRegex();
 
@@ -331,14 +321,14 @@ function getParamSelectValue(rawValue, variationText, locale) {
             break;
         }
 
-        const [_, mixinBeforeVariant, comparedValue, variant] = match;
+        const [_, separator, mixinBeforeVariant, mixinBeforeComparedValue, comparedValue, variant] = match;
 
-        const variantIndex = match.index + mixinBeforeVariant.length;
+        const variantIndex = match.index + separator.length + mixinBeforeVariant.length;
         const variantLength = variant.length;
 
         if (comparedValue === undefined) {
             return {
-                ...toVariantValue(variant),
+                ...toVariantValue(variant, formattedValue),
                 origin: {
                     index: variantIndex,
                     length: variantLength
@@ -346,14 +336,34 @@ function getParamSelectValue(rawValue, variationText, locale) {
             };
         }
 
-        const rawString = '' + rawValue;
-        const comparedString = '' + comparedValue;
+        // has comparedValue -> has mixinBeforeComparedValue
+        const comparedValueIndex = match.index + separator.length + mixinBeforeComparedValue.length;
+        const comparedValueLength = comparedValue.length;
 
-        let passed = (rawString === comparedString);
-
-        if (passed) {
+        const comparedValueEscapedItems = variationEscapedItems.filter(item => {
+            return (
+                item.sliceIndex >= comparedValueIndex &&
+                item.sliceIndex < comparedValueIndex + comparedValueLength
+            );
+        }).map(item => {
             return {
-                ...toVariantValue(variant),
+                escapedSubtext: item.escapedSubtext,
+                subtext: item.subtext,
+                sliceIndex: item.sliceIndex - comparedValueIndex,
+                sliceIndexChange: 0,
+                retainedInResult: true
+            };
+        });
+
+        console.log(comparedValueEscapedItems);
+
+        const comparedString = unescapeMessage(comparedValue, comparedValueEscapedItems);
+
+        console.log(comparedString);
+
+        if (rawString === comparedString) {
+            return {
+                ...toVariantValue(variant, formattedValue),
                 origin: {
                     index: variantIndex,
                     length: variantLength
@@ -364,6 +374,22 @@ function getParamSelectValue(rawValue, variationText, locale) {
     } while (true);
 
     return {value: formattedValue};
+}
+
+function toVariantValue(variant, formattedValue) {
+    const paramReplacements = [];
+
+    const value = variant.replace(createVariantParamRegex(), (paramMatch, paramMatchIndex) => {
+        paramReplacements.push({
+            index: paramMatchIndex,
+            oldLength: paramMatch.length,
+            newLength: formattedValue.length
+        });
+
+        return formattedValue;
+    });
+
+    return {value, paramReplacements};
 }
 
 function forEscape(text, handleEscaped, handleNormal) {
