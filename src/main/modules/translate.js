@@ -6,6 +6,7 @@ import {
     createVariationPluralRegex,
     createVariationSelectRegex,
     createVariantParamRegex,
+    createTrimRegex,
 } from './regex';
 
 
@@ -67,7 +68,7 @@ function escapedDeparametrize(escapedMessage, escapedItems, params, id, locale) 
             updateSliceIndexesAfterReplaceOneMessageParamByValue(
                 escapedItems, fullMatchIndex, fullMatch.length,
                 variationTextRelativeIndex, variantResult.value,
-                variantResult.paramReplacements, variantResult.origin
+                variantResult.insideReplacements, variantResult.origin
             );
 
             return variantResult.value;
@@ -145,7 +146,7 @@ function unescapeMessage(message, escapedItems) {
  * @param {number} fullMatchLength
  * @param {number} variationTextRelativeIndex
  * @param {string} value
- * @param {object[]|undefined} variantParamReplacements
+ * @param {object[]|undefined} variantInsideReplacements
  * @param {object|undefined} variantOrigin
  */
 function updateSliceIndexesAfterReplaceOneMessageParamByValue
@@ -155,7 +156,7 @@ function updateSliceIndexesAfterReplaceOneMessageParamByValue
     fullMatchLength,
     variationTextRelativeIndex,
     value,
-    variantParamReplacements = null,
+    variantInsideReplacements = null,
     variantOrigin = {index: 0, length: 0}
 )
 {
@@ -190,15 +191,15 @@ function updateSliceIndexesAfterReplaceOneMessageParamByValue
         // update slice index change
         item.sliceIndexChange += -variantRelativeIndex;
 
-        // if no variant param replacements
+        // if no variant inside replacements
         // next
-        if (variantParamReplacements === null) {
+        if (variantInsideReplacements === null) {
             return;
         }
 
-        // base on variant param replacements
+        // base on variant inside replacements
         // continue update slice index change
-        variantParamReplacements.forEach(({index: paramIndex, oldLength, newLength}) => {
+        variantInsideReplacements.forEach(({index: paramIndex, oldLength, newLength}) => {
             const paramAbsoluteIndex = fullMatchIndex + variationTextRelativeIndex + variantOrigin.index + paramIndex;
 
             // if this item is behind the end of variant param
@@ -367,10 +368,22 @@ function getParamSelectValue(rawValue, variationText, variationEscapedItems) {
 }
 
 function toVariantValue(variant, formattedValue) {
-    const paramReplacements = [];
+    const insideReplacements = [];
 
-    const value = variant.trim().replace(createVariantParamRegex(), (paramMatch, paramMatchIndex) => {
-        paramReplacements.push({
+    const trimmedVariant = variant.replace(createTrimRegex(), (spaces, index) => {
+        if (spaces.length > 0) {
+            insideReplacements.push({
+                index: index,
+                oldLength: spaces.length,
+                newLength: 0
+            });
+        }
+
+        return '';
+    });
+
+    const value = trimmedVariant.replace(createVariantParamRegex(), (paramMatch, paramMatchIndex) => {
+        insideReplacements.push({
             index: paramMatchIndex,
             oldLength: paramMatch.length,
             newLength: formattedValue.length
@@ -379,7 +392,7 @@ function toVariantValue(variant, formattedValue) {
         return formattedValue;
     });
 
-    return {value, paramReplacements};
+    return {value, insideReplacements};
 }
 
 function forEscape(text, handleEscaped, handleNormal) {

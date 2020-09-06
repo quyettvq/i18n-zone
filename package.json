@@ -18,10 +18,12 @@
     "javascript i18n",
     "i18n javascript",
     "i18n js",
+    "localization",
+    "javascript localization",
+    "localization javascript",
     "pluralization",
     "javascript pluralization",
-    "pluralization javascript",
-    "js pluralization"
+    "pluralization javascript"
   ],
   "author": "Tran Van Quyet <quyettvq@gmail.com>",
   "license": "MIT",

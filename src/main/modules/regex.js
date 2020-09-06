@@ -59,7 +59,7 @@ function createVariationPluralRegex() {
  * https://regex101.com/r/wyhpE5/7
  */
 function createVariationSelectRegex() {
-    return /(,)((?:(\s*\*)([^,]+)\*|)\s)([^,]*)/g;
+    return /(,)((\s*\*)([^,]+)\*|)([^,]*)/g;
 }
 
 /**
@@ -70,6 +70,14 @@ function createVariantParamRegex() {
     return /:@/g;
 }
 
+/**
+ *
+ * @return {RegExp}
+ */
+function createTrimRegex() {
+    return /^\s+|\s+$/g;
+}
+
 export {
     createVariableStyleIdRegex,
     createEscapeRegex,
@@ -77,4 +85,5 @@ export {
     createVariationPluralRegex,
     createVariationSelectRegex,
     createVariantParamRegex,
+    createTrimRegex
 }
