@@ -4,10 +4,12 @@ settings.setResource('en', {});
 
 const data = [
     [
-        'There :count(PLURAL, 1    is [one] message  ,\
-        <10     are some messages     ,\
-        <100    are :@ messages[,] good job!     ,\
-        !    are :@ messages[,] awesome!    )',
+        `There :count(PLURAL,
+            1    is [one] message  ,
+            <10     are some messages     ,
+            <100    are :@ messages[,] good job!     ,
+            !    are :@ messages[,] awesome!
+        )`,
         {count: 1},
         'There is one message',
         {count: 9},
@@ -18,11 +20,17 @@ const data = [
         'There are 10,000 messages, awesome!',
     ],
     [
-        'There :numOfDays(PLURAL, 1 is :@ :yourName [[day]], 0 is no days, <10 are some days, 365 is one year, ! are :@ days) for :yourName kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
+        `There :numOfDays(PLURAL,
+            1 is :@ :yourName [[day]], 
+            0\n  [ ]is no days ,
+            <10    \n are some days, 
+            365 is one year          \n, 
+            ! are :@ days
+        ) for :yourName kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk`,
         {numOfDays: 1, yourName: 'Quyết'},
         'There is 1 :yourName [day] for Quyết kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
         {numOfDays: 0, yourName: 'Quyết'},
-        'There is no days for Quyết kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
+        'There  is no days for Quyết kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
         {numOfDays: 6, yourName: 'Quyết'},
         'There are some days for Quyết kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
         {numOfDays: 365, yourName: 'Quyết'},

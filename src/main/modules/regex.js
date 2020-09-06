@@ -30,10 +30,10 @@ function createEscapeRegex() {
  *
  * Full match: message param
  * Groups: notation, paramName, mixinBeforeVariationText, variationType, variationText
- * https://regex101.com/r/2QkEEc/15
+ * https://regex101.com/r/2QkEEc/16
  */
 function createMessageParamRegex() {
-    return /(:)([a-zA-Z_][a-zA-Z0-9_]*)(?:(\(\s*([A-Z]+)\s*)(|,.+?)\))?/g;
+    return /(:)([a-zA-Z_][a-zA-Z0-9_]*)(?:(\(\s*([A-Z]+)\s*)(|,[^]+?)\))?/g;
 }
 
 /**
