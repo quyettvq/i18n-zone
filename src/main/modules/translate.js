@@ -54,20 +54,9 @@ function escapedDeparametrize(escapedMessage, escapedItems, params, id, locale) 
             const variationTextRelativeIndex = (notation + paramName + mixinBeforeVariationText).length;
             const variationTextIndex = fullMatchIndex + variationTextRelativeIndex;
 
-            const variationEscapedItems = escapedItems.filter(item => {
-                return (
-                    item.sliceIndex >= variationTextIndex &&
-                    item.sliceIndex < variationTextIndex + variationText.length
-                );
-            }).map(item => {
-                return {
-                    escapedSubtext: item.escapedSubtext,
-                    subtext: item.subtext,
-                    sliceIndex: item.sliceIndex - variationTextIndex,
-                    sliceIndexChange: 0,
-                    retainedInResult: true
-                };
-            });
+            const variationEscapedItems = getSubEscapedItems(
+                escapedItems, variationTextIndex, variationText.length
+            );
 
             const variantResult = getParamVariantValue(
                 params[paramName], paramName,
@@ -110,6 +99,23 @@ function escapeMessage(message) {
     forEscape(message, handleEscaped, handleNormal);
 
     return [escapedMessage, escapedItems];
+}
+
+function getSubEscapedItems(escapedItems, subIndex, subLength) {
+    return escapedItems.filter(item => {
+        return (
+            item.sliceIndex >= subIndex &&
+            item.sliceIndex < subIndex + subLength
+        );
+    }).map(item => {
+        return {
+            escapedSubtext: item.escapedSubtext,
+            subtext: item.subtext,
+            sliceIndex: item.sliceIndex - subIndex,
+            sliceIndexChange: 0,
+            retainedInResult: true
+        };
+    });
 }
 
 function unescapeMessage(message, escapedItems) {
@@ -338,28 +344,12 @@ function getParamSelectValue(rawValue, variationText, variationEscapedItems) {
 
         // has comparedValue -> has mixinBeforeComparedValue
         const comparedValueIndex = match.index + separator.length + mixinBeforeComparedValue.length;
-        const comparedValueLength = comparedValue.length;
 
-        const comparedValueEscapedItems = variationEscapedItems.filter(item => {
-            return (
-                item.sliceIndex >= comparedValueIndex &&
-                item.sliceIndex < comparedValueIndex + comparedValueLength
-            );
-        }).map(item => {
-            return {
-                escapedSubtext: item.escapedSubtext,
-                subtext: item.subtext,
-                sliceIndex: item.sliceIndex - comparedValueIndex,
-                sliceIndexChange: 0,
-                retainedInResult: true
-            };
-        });
-
-        console.log(comparedValueEscapedItems);
+        const comparedValueEscapedItems = getSubEscapedItems(
+            variationEscapedItems, comparedValueIndex, comparedValue.length
+        );
 
         const comparedString = unescapeMessage(comparedValue, comparedValueEscapedItems);
-
-        console.log(comparedString);
 
         if (rawString === comparedString) {
             return {
@@ -379,7 +369,7 @@ function getParamSelectValue(rawValue, variationText, variationEscapedItems) {
 function toVariantValue(variant, formattedValue) {
     const paramReplacements = [];
 
-    const value = variant.replace(createVariantParamRegex(), (paramMatch, paramMatchIndex) => {
+    const value = variant.trim().replace(createVariantParamRegex(), (paramMatch, paramMatchIndex) => {
         paramReplacements.push({
             index: paramMatchIndex,
             oldLength: paramMatch.length,

@@ -10,4 +10,4 @@ settings.setResource('en', require('./resources/en.json'));
 
 // console.log(translate('choosing_number_of_days{numOfDays}', {numOfDays: 1200}));
 
-console.log(translate('Hello:gender(SELECT, *[m]ale[,] [*]*  Mr., *femal[f]e*  Ms., [,]) :name', {gender: 'femalfe', name: 'Billy'}));
+console.log(translate('Hello:gender(SELECT, *[m]ale[,] [*]*  Mr., *femal[f]e* [ ][Ms.][,,,[))])**], [,]) :name', {gender: 'femalfe', name: 'Billy'}));
