@@ -76,7 +76,7 @@ translate('There :count(PLURAL, 0 are no comments, 1 is one comment, <10 are som
 // -> There are 10 comments.
 ```
 
-## Number formatter
+## Number formatting
 
 ```javascript
 // change the way to format number
