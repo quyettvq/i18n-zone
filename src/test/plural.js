@@ -22,7 +22,7 @@ const data = [
         {numOfDays: 1, yourName: 'Quyết'},
         'There is 1 :yourName [day] for Quyết kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
         {numOfDays: 0, yourName: 'Quyết'},
-        '"There is no days for Quyết kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
+        'There is no days for Quyết kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
         {numOfDays: 6, yourName: 'Quyết'},
         'There are some days for Quyết kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk',
         {numOfDays: 365, yourName: 'Quyết'},

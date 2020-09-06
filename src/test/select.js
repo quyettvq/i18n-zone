@@ -15,10 +15,10 @@ const data = [
         'There are 10000 messages, awesome!',
     ],
     [
-        'Hello:gender(SELECT, *[m]ale[,] [*]* [ ]Mr[.], * f[ema]le * [ ][Ms.][,,,)]][))**], [,]) :name',
+        'Hello:gender(SELECT, *[m]ale[,] [*]* [ ]Mr[.], * female[*] * [ ][Ms.][,,,)]][))]**, [,]) :name',
         {gender: 'male, *', name: 'Billy'},
         'Hello Mr. Billy',
-        {gender: ' female ', name: 'Jonathan'},
+        {gender: ' female* ', name: 'Jonathan'},
         'Hello Ms.,,,)]))** Jonathan',
         {gender: 'other', name: 'Jame'},
         'Hello, Jame',

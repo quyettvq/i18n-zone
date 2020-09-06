@@ -17,10 +17,10 @@ function createVariableStyleIdRegex() {
  *
  * Full match: sub text
  * Groups: escapedSubText
- * https://regex101.com/r/KSIPNR/3
+ * https://regex101.com/r/KSIPNR/6
  */
 function createEscapeRegex() {
-    return /\[(.*?[\]\s]*)]/g;
+    return /\[([\[\s]*[^\[]*?[\]\s]*)]/g;
 }
 
 /**
@@ -56,10 +56,10 @@ function createVariationPluralRegex() {
  *
  * Full match: a variant text
  * Groups: separator, mixinBeforeVariant, mixinBeforeComparedValue?, comparedValue?, variant
- * https://regex101.com/r/wyhpE5/7
+ * https://regex101.com/r/wyhpE5/9
  */
 function createVariationSelectRegex() {
-    return /(,)((\s*\*)([^,]+)\*|)([^,]*)/g;
+    return /(,)((\s*\*)([^*]+)\*|)([^,]*)/g;
 }
 
 /**
