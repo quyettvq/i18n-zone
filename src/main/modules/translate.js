@@ -4,6 +4,7 @@ import {
     createEscapeRegex,
     createMessageParamRegex,
     createVariationPluralRegex,
+    createVariationSelectRegex,
     createVariantParamRegex,
 } from './regex';
 
@@ -206,6 +207,10 @@ function getParamVariantValue(rawValue, paramName, variationType, variationText,
         return getParamArrayValue(rawValue, locale);
     }
 
+    if (variationType === 'SELECT') {
+        return getParamSelectValue(rawValue, variationText, locale);
+    }
+
     if ('number' === typeof rawValue) {
         if (variationType === 'PLURAL') {
             return getParamPluralValue(rawValue, variationText, locale);
@@ -280,6 +285,71 @@ function getParamPluralValue(rawValue, variationText, locale) {
             || operator === '<=' && rawNumber <= comparedNumber
             || operator === '' && rawNumber === comparedNumber
         );
+
+        if (passed) {
+            return {
+                ...toVariantValue(variant),
+                origin: {
+                    index: variantIndex,
+                    length: variantLength
+                }
+            };
+        }
+
+    } while (true);
+
+    return {value: formattedValue};
+}
+
+function getParamSelectValue(rawValue, variationText, locale) {
+    const formattedValue = rawValue;
+
+    const toVariantValue = (variant) => {
+        const paramReplacements = [];
+
+        let value = variant.replace(createVariantParamRegex(), (paramMatch, paramMatchIndex) => {
+            paramReplacements.push({
+                index: paramMatchIndex,
+                oldLength: paramMatch.length,
+                newLength: formattedValue.length
+            });
+
+            return formattedValue;
+        });
+
+        return {value, paramReplacements};
+    };
+
+    const regex = createVariationSelectRegex();
+
+    let match;
+
+    do {
+        match = regex.exec(variationText);
+
+        if (match === null) {
+            break;
+        }
+
+        const [_, mixinBeforeVariant, comparedValue, variant] = match;
+
+        const variantIndex = match.index + mixinBeforeVariant.length;
+        const variantLength = variant.length;
+
+        if (comparedValue === undefined) {
+            return {
+                ...toVariantValue(variant),
+                origin: {
+                    index: variantIndex,
+                    length: variantLength
+                }
+            };
+        }
+
+        const rawString = '' + rawValue;
+        const comparedString = '' + comparedValue;
+
+        let passed = (rawString === comparedString);
 
         if (passed) {
             return {
