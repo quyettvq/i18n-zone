@@ -18,7 +18,7 @@ npm install i18n-zone
 translate('Welcome!');
 
 // Parametrize
-translate('My favourite music song is :song.', {song: 'My heart will go on'});
+translate('My favourite song is :song.', {song: 'My heart will go on'});
 
 // Pluralization
 translate('There :count(PLURAL, 0 are no people, 1 is one person, <=5 are some people, ! are :@ people)', {count: 10}).;
