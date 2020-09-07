@@ -21,8 +21,6 @@ function translate(id, params = null, locale = getLocale()) {
 
     const deparametrizedEscapedMessage = escapedDeparametrize(escapedMessage, escapedItems, params, id, locale);
 
-    // console.log(escapedItems);
-
     return unescapeMessage(deparametrizedEscapedMessage, escapedItems);
 }
 
