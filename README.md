@@ -132,6 +132,15 @@ translate('Hello :gender(SELECT, *male* Mr., *female* Ms.) :name!', {gender: 'ma
 Place the text in square brackets to escape
 
 ```javascript
+translate('This car has the power of :power[HP]', {power: 800});
+// -> This car has the power of 800HP
+
+translate('I have :amount[[USD]]', {amount: 100});
+// -> I have 100[USD]
+
+translate('I have [ :amount[[USD]] ].', {amount: 100});
+// -> I have [ 100[USD]] .
+
 translate('Hi :police, [:criminal] has been [[escaped]]', {police: 'Jame', criminal: 'Billy'});
 // -> Hi Jame, :criminal has been [escaped]
 

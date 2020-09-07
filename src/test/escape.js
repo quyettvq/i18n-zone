@@ -18,6 +18,21 @@ const data = [
         {count: 1},
         'There [:counthaha] 1[ one ] [[]]',
     ],
+    [
+        `This car has the power of :power[HP]`,
+        {power: 800},
+        'This car has the power of 800HP',
+    ],
+    [
+        `I have :amount[[USD]]`,
+        {amount: 100},
+        'I have 100[USD]',
+    ],
+    [
+        `I have [ :amount[[USD]] ].`,
+        {amount: 100},
+        'I have [ 100[USD]] .',
+    ],
 
 ];
 
