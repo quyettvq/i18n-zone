@@ -12,6 +12,21 @@
 npm install i18n-zone
 ```
 
+## Syntax
+
+```javascript
+translate('Welcome!');
+
+// Parametrize
+translate('My favourite music song is :song.', {song: 'My heart will go on'});
+
+// Pluralization
+translate('There :count(PLURAL, 0 are no people, 1 is one person, <=5 are some people, ! are :@ people)', {count: 10});
+
+// Selection
+translate('Hello :gender(SELECT, *male* Mr., *female* Ms.) :name, how are you?', {name: 'Jerry', gender: 'male'});
+```
+
 ## Resources
 `vi.json`
 ```json
