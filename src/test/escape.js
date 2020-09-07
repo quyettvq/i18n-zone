@@ -4,10 +4,21 @@ settings.setResource('en', {});
 
 const data = [
     [
-        `There :count[haha]`,
+        `There :count[haha] :count[[] one []] [[[]]]`,
         {count: 1},
-        'There 1haha',
-    ]
+        'There 1haha 1[ one ] [[]]',
+    ],
+    [
+        `There [:count[haha] :count[[] one []] [[[]]]`,
+        {count: 1},
+        'There [1haha 1[ one ] [[]]',
+    ],
+    [
+        `There [[:count][haha]] :count[[] one []] [[[]]]`,
+        {count: 1},
+        'There [:counthaha] 1[ one ] [[]]',
+    ],
+
 ];
 
 data.forEach(item => {
