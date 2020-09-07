@@ -1,6 +1,6 @@
 {
   "name": "i18n-zone",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "i18n for JavaScript",
   "main": "index.js",
   "scripts": {
@@ -20,10 +20,8 @@
     "i18n js",
     "localization",
     "javascript localization",
-    "localization javascript",
     "pluralization",
     "javascript pluralization",
-    "pluralization javascript"
   ],
   "author": "Tran Van Quyet <quyettvq@gmail.com>",
   "license": "MIT",
