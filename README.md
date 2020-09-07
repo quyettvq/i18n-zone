@@ -1,6 +1,6 @@
 # I18n module for JavaScript
 
-***i18n-zone**: A module with the simple and clean syntax, supports internationalization in projects using JavaScript. It is very lightweight, less than 8KB (without gzip). Main features: translating, number formatting, pluralization, selection.*
+***i18n-zone**: A module with clean and nice syntax supports internationalization in projects using JavaScript. It has no dependencies, very lightweight (less than 8KB without gzip). Main features: translating, number formatting, pluralization, selection.*
 
 [![NPM version][npm-image]][npm-url]
 
