@@ -10,13 +10,9 @@ settings.setResource('vi', require('./resources/vi.json'));
 console.log('validate resources:');
 console.log(validator.validateResources());
 
-translate( '', 22);
+settings.setLocale('en');
 
-translate('Hello', 333);
+console.log(translate('choosing_number_of_days{numOfDays}', {numOfDays: 1200}));
 
-// settings.setLocale('en');
-
-// console.log(translate('choosing_number_of_days{numOfDays}', {numOfDays: 1200}));
-
-// console.log(translate('Hello:gender(SELECT, *[m]ale[,] [*]*  Mr., *femal[f]e* [ ][Ms.][,,,[))])**], [,]) :name', {gender: 'femalfe', name: 'Billy'}));
+console.log(translate('Hello:gender(SELECT, *[m]ale[,] [*]*  Mr., *femal[f]e* [ ][Ms.][,,,[))])**], [,]) :name', {gender: 'femalfe', name: 'Billy'}));
 
