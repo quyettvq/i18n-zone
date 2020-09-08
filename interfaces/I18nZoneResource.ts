@@ -1,3 +1,3 @@
 export interface I18nZoneResource {
-  [id: string]: string
+    [id: string]: string
 }
