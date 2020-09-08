@@ -10,6 +10,10 @@ settings.setResource('vi', require('./resources/vi.json'));
 console.log('validate resources:');
 console.log(validator.validateResources());
 
+translate( '', 22);
+
+translate('Hello', 333);
+
 // settings.setLocale('en');
 
 // console.log(translate('choosing_number_of_days{numOfDays}', {numOfDays: 1200}));
