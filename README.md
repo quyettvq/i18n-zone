@@ -237,6 +237,3 @@ validator.setOption('idShouldReflectParams', false);
 
 ## Interfaces
 [Link to interfaces](https://github.com/quyettvq/i18n-zone/tree/master/interfaces)
-
-## Try it yourself
-[Try on RunKit](https://runkit.com/quyettvq/i18n-zone)
