@@ -106,15 +106,15 @@ translate('This year is :year', {year: '2020'});
 ```
 
 
-## Currency formatter
+## Currency formatting
 
 ```javascript
 
 /**
- * @return {string} formatted number
+ * @return {string} formatted value
  */
 const formatCurrency = (amount, locale, style) => {
-    if (style === 'short') {
+    if (style === 'symbol') {
         return translate('$:amount', {amount}, locale);
     }
     
@@ -128,7 +128,7 @@ settings.setCurrencyFormatter(formatNumber);
 translate('Total amount is :amount(CURRENCY)', {amount: 10000});
 // -> Total amount is 10,000 USD
 
-translate('Total amount is :amount(CURRENCY, short)', {amount: 10000});
+translate('Total amount is :amount(CURRENCY, symbol)', {amount: 10000});
 // -> Total amount is $10,000
 ```
 
