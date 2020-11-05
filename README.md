@@ -121,7 +121,7 @@ const formatCurrency = (amount, locale, style) => {
     return translate(':amount USD', {amount}, locale);
 };
 
-settings.setCurrencyFormatter(formatNumber);
+settings.setCurrencyFormatter(formatCurrency);
 ```
 
 ```javascript
