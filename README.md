@@ -234,7 +234,7 @@ validator.setOption('idMaxLength', null);
 
 #### singleWordMessageMaxLength
 
-Validate that single-word messages do not contains too many characters. Set `null` to disable.
+Validate that single-word messages do not contain too many characters. Set `null` to disable.
 
 _(Single-word messages are messages contain only one word, no whitespaces between)._
 
