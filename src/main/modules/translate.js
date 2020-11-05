@@ -10,6 +10,9 @@ import {
 } from './regex';
 
 
+const ESCAPE_PLACEHOLDER = '+';
+
+
 function translate(id, params = null, locale = getLocale()) {
     const message = getMessage(id, locale);
 
@@ -20,8 +23,6 @@ function translate(id, params = null, locale = getLocale()) {
     const [escapedMessage, escapedItems] = escapeMessage(message);
 
     const deparametrizedEscapedMessage = escapedDeparametrize(escapedMessage, escapedItems, params, id, locale);
-
-    // console.log(escapedItems);
 
     return unescapeMessage(deparametrizedEscapedMessage, escapedItems);
 }
@@ -82,7 +83,7 @@ function escapeMessage(message) {
 
     const handleEscaped = (escapedSubtext, subtext, sliceIndex) => {
         // replace by a safe string
-        escapedMessage += subtext.replace(/[^\s]/g, 'z');
+        escapedMessage += subtext.replace(/[^\s]/g, ESCAPE_PLACEHOLDER);
 
         escapedItems.push({
             escapedSubtext,

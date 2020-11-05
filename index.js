@@ -1,10 +1,25 @@
 /**
  * @type {I18nZone}
  */
-const i18n = require('./dist/lib.js');
+const i18n = require('./dist/lib.min.js');
 
 /**
  *
- * @type {I18nZone}
+ * @param {string} id
+ * @param {Object.<string,string|number|Array>|null?} params
+ * @param {string?} locale
+ * @return {string}
  */
-module.exports = i18n;
+module.exports.translate = (id, params, locale) => i18n.translate(id, params, locale);
+
+/**
+ *
+ * @type {I18nZoneSettings}
+ */
+module.exports.settings = i18n.settings;
+
+/**
+ *
+ * @type {I18nZoneValidator}
+ */
+module.exports.validator = i18n.validator;

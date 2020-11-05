@@ -1,6 +1,6 @@
 # I18n module for JavaScript
 
-***i18n-zone**: A module with the simple and clear syntax, supports internationalization in projects using JavaScript. Main features: translating, number formatting, pluralization, syntax-escaping.*
+***i18n-zone**: A module with clean and nice syntax supports internationalization in projects using JavaScript. It has no dependencies, very lightweight (less than 8KB without gzip). Main features: translating, number formatting, pluralization, selection.*
 
 [![NPM version][npm-image]][npm-url]
 
@@ -76,7 +76,7 @@ translate('There :count(PLURAL, 0 are no comments, 1 is one comment, <10 are som
 // -> There are 10 comments.
 ```
 
-## Number formatter
+## Number formatting
 
 ```javascript
 // change the way to format number
@@ -141,6 +141,15 @@ translate('Hello :gender(SELECT, *male* Mr., *female* Ms.) :name!', {gender: 'ma
 Place the text in square brackets to escape
 
 ```javascript
+translate('This car has the power of :power[HP]', {power: 800});
+// -> This car has the power of 800HP
+
+translate('I have :amount[[USD]]', {amount: 100});
+// -> I have 100[USD]
+
+translate('I have [ :amount[[USD]] ].', {amount: 100});
+// -> I have [ 100[USD]] .
+
 translate('Hi :police, [:criminal] has been [[escaped]]', {police: 'Jame', criminal: 'Billy'});
 // -> Hi Jame, :criminal has been [escaped]
 
