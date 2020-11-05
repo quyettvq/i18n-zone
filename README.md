@@ -93,6 +93,19 @@ const formatNumber = (number, locale) => {
 settings.setNumberFormatter(formatNumber);
 ```
 
+```javascript
+translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 100000});
+// -> There are 100,000 dog.
+
+translate('That car costs :price USD', {price: 55000});
+// -> That car costs 55,000 USD
+
+// Use string if you don't want to format
+translate('This year is :year', {year: '2020'});
+// -> This year is 2020
+```
+
+
 ## Currency formatter
 
 ```javascript
@@ -112,16 +125,6 @@ settings.setCurrencyFormatter(formatNumber);
 ```
 
 ```javascript
-translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 100000});
-// -> There are 100,000 dog.
-
-translate('That car costs :price USD', {price: 55000});
-// -> That car costs 55,000 USD
-
-// Use string if you don't want to format
-translate('This year is :year', {year: '2020'});
-// -> This year is 2020
-
 translate('Total amount is :amount(CURRENCY)', {amount: 10000});
 // -> Total amount is 10,000 USD
 
@@ -234,7 +237,7 @@ validator.setOption('idMaxLength', null);
 
 #### singleWordMessageMaxLength
 
-Validate that single-word messages do not contain too many characters. Set `null` to disable.
+Validate that single-word messages do not contain: too many characters. Set `null` to disable.
 
 _(Single-word messages are messages contain only one word, no whitespaces between)._
 
