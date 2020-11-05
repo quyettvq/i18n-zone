@@ -1,4 +1,4 @@
-import {getLocale, getResource, getNumberFormatter} from "./settings";
+import {getLocale, getResource, getNumberFormatter, getCurrencyFormatter} from "./settings";
 import {logResourceNotFound, logTranslationNotFound} from "./log";
 import {
     createEscapeRegex,
@@ -237,6 +237,10 @@ function getParamVariantValue(rawValue, paramName, variationType, variationText,
         return getParamSelectValue(rawValue, variationText, variationEscapedItems);
     }
 
+    if (variationType === 'CURRENCY') {
+        return getParamCurrencyValue(rawValue, variationText, locale);
+    }
+
     if ('number' === typeof rawValue) {
         return getParamNumberValue(rawValue, locale);
     }
@@ -254,6 +258,14 @@ function getParamArrayValue(rawValue, locale) {
 
 function getParamNumberValue(rawValue, locale) {
     return {value: (getNumberFormatter())(rawValue, locale)};
+}
+
+function getParamCurrencyValue(rawValue, variationText, locale) {
+    const style = variationText
+            .substring(1, variationText.length) // exclude starting comma
+            .replace(createTrimRegex(), '');
+
+    return {value: (getCurrencyFormatter())(rawValue, locale, style)};
 }
 
 function getParamPluralValue(rawValue, variationText, locale) {

@@ -10,6 +10,8 @@ export interface I18nZoneSettings {
   getResource(locale): I18nZoneResource,
   setResources(resources: I18nZoneResources): void,
   getResources(): I18nZoneResources,
-  setNumberFormatter(numberFormatter: (number: number, locale: string, options?: {}) => string): void,
-  getNumberFormatter(): (number: number, locale: string, options?: {}) => string
+  setNumberFormatter(numberFormatter: (number: number, locale: string) => string): void,
+  getNumberFormatter(): (number: number, locale: string) => string,
+  setCurrencyFormatter(currencyFormatter: (amount: number, locale: string, style: string) => string): void,
+  getCurrencyFormatter(): (amount: number, locale: string, style: string) => string,
 }

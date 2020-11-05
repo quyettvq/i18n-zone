@@ -1,9 +1,9 @@
-
 const settings = {
     locale: 'en',
     defaultLocale: 'en',
     resources: {},
-    numberFormatter: (number, locale, options) => Number(number).toLocaleString(locale, options),
+    numberFormatter: (number, locale) => Number(number).toLocaleString(locale),
+    currencyFormatter: (amount, locale, style) => Number(amount).toLocaleString(locale, {style: 'currency', currency: 'USD'}),
 };
 
 function setLocale(locale) {
@@ -46,6 +46,14 @@ function getNumberFormatter() {
     return settings.numberFormatter;
 }
 
+function setCurrencyFormatter(currencyFormatter) {
+    settings.currencyFormatter = currencyFormatter;
+}
+
+function getCurrencyFormatter() {
+    return settings.currencyFormatter;
+}
+
 export {
     setLocale,
     setDefaultLocale,
@@ -57,4 +65,6 @@ export {
     getResources,
     setNumberFormatter,
     getNumberFormatter,
+    setCurrencyFormatter,
+    getCurrencyFormatter,
 };

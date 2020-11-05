@@ -93,6 +93,24 @@ const formatNumber = (number, locale) => {
 settings.setNumberFormatter(formatNumber);
 ```
 
+## Currency formatter
+
+```javascript
+
+/**
+ * @return {string} formatted number
+ */
+const formatCurrency = (amount, locale, style) => {
+    if (style === 'short') {
+        return translate('$:amount', {amount}, locale);
+    }
+    
+    return translate(':amount USD', {amount}, locale);
+};
+
+settings.setCurrencyFormatter(formatNumber);
+```
+
 ```javascript
 translate('there_are_some_dogs{numOfDogs}', {numOfDogs: 100000});
 // -> There are 100,000 dog.
@@ -103,6 +121,12 @@ translate('That car costs :price USD', {price: 55000});
 // Use string if you don't want to format
 translate('This year is :year', {year: '2020'});
 // -> This year is 2020
+
+translate('Total amount is :amount(CURRENCY)', {amount: 10000});
+// -> Total amount is 10,000 USD
+
+translate('Total amount is :amount(CURRENCY, short)', {amount: 10000});
+// -> Total amount is $10,000
 ```
 
 ## Selection
