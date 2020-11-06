@@ -23,6 +23,13 @@ const data = [
         {gender: 'other', name: 'Jame'},
         'Hello, Jame',
     ],
+    [
+        ':product:option(SELECT, ** , [ ]- :@)',
+        {product: 'Tissot Carson Premium Powermatic 80', option: ''},
+        'Tissot Carson Premium Powermatic 80',
+        {product: 'Tissot Carson Premium Powermatic 80', option: 'Gold'},
+        'Tissot Carson Premium Powermatic 80 - Gold',
+    ]
 ];
 
 

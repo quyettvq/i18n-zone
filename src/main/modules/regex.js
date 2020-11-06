@@ -59,7 +59,7 @@ function createVariationPluralRegex() {
  * https://regex101.com/r/wyhpE5/9
  */
 function createVariationSelectRegex() {
-    return /(,)((\s*\*)([^*]+)\*|)([^,]*)/g;
+    return /(,)((\s*\*)([^*]*)\*|)([^,]*)/g;
 }
 
 /**
