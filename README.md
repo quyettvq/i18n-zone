@@ -76,6 +76,13 @@ translate('There :count(PLURAL, 0 are no comments, 1 is one comment, <10 are som
 // -> There are 10 comments.
 ```
 
+## Selection
+
+```javascript
+translate('Hello :gender(SELECT, *male* Mr., *female* Ms.) :name!', {gender: 'male', name: 'Jame'});
+// -> Hello Mr. Jame!
+```
+
 ## Number formatting
 
 ```javascript
@@ -105,7 +112,6 @@ translate('This year is :year', {year: '2020'});
 // -> This year is 2020
 ```
 
-
 ## Currency formatting
 
 ```javascript
@@ -132,7 +138,6 @@ translate('Total amount is :amount(CURRENCY, symbol)', {amount: 10000});
 // -> Total amount is $10,000
 ```
 
-
 ## Date formatting
 
 ```javascript
@@ -157,13 +162,6 @@ translate('Today is :today(DATE)', {today: new Date()});
 
 translate('Updated on :date(DATE)', {date: '2021-02-01 23:00:00'});
 // -> Updated on 01/02/2021
-```
-
-## Selection
-
-```javascript
-translate('Hello :gender(SELECT, *male* Mr., *female* Ms.) :name!', {gender: 'male', name: 'Jame'});
-// -> Hello Mr. Jame!
 ```
 
 ## Escaping
