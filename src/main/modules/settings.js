@@ -4,6 +4,7 @@ const settings = {
     resources: {},
     numberFormatter: (number, locale) => Number(number).toLocaleString(locale),
     currencyFormatter: (amount, locale, style) => Number(amount).toLocaleString(locale, {style: 'currency', currency: 'USD'}),
+    dateFormatter: (date, locale, style) => new Date(date).toLocaleDateString(locale),
 };
 
 function setLocale(locale) {
@@ -54,6 +55,14 @@ function getCurrencyFormatter() {
     return settings.currencyFormatter;
 }
 
+function setDateFormatter(dateFormatter) {
+    settings.dateFormatter = dateFormatter;
+}
+
+function getDateFormatter() {
+    return settings.dateFormatter;
+}
+
 export {
     setLocale,
     setDefaultLocale,
@@ -67,4 +76,6 @@ export {
     getNumberFormatter,
     setCurrencyFormatter,
     getCurrencyFormatter,
+    setDateFormatter,
+    getDateFormatter,
 };

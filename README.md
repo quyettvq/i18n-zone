@@ -132,6 +132,33 @@ translate('Total amount is :amount(CURRENCY, symbol)', {amount: 10000});
 // -> Total amount is $10,000
 ```
 
+
+## Date formatting
+
+```javascript
+
+/**
+ * @return {string} formatted date
+ */
+const formatDate = (date, locale, style) => {
+    const d = new Date(date);
+    
+    const pad = t => (t < 10 ? '0' : '') + t;
+
+    return `${pad(d.getDate())}/${pad(d.getMonth() + 1)}/${d.getFullYear()}`;
+};
+
+settings.setDateFormatter(formatDate);
+```
+
+```javascript
+translate('Today is :today(DATE)', {today: new Date()});
+// -> Today is 21/11/2020
+
+translate('Updated on :date(DATE)', {date: '2021-02-01 23:00:00'});
+// -> Updated on 01/02/2021
+```
+
 ## Selection
 
 ```javascript

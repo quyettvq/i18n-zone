@@ -25,4 +25,9 @@ export interface I18nZoneSettings {
     setCurrencyFormatter(currencyFormatter: (amount: number, locale: string, style: string) => string): void,
 
     getCurrencyFormatter(): (amount: number, locale: string, style: string) => string,
+  
+    setDateFormatter(dateFormatter: (date: any, locale: string, style: string) => string): void,
+
+    getDateFormatter(): (date: any, locale: string, style: string) => string,
+
 }
