@@ -108,7 +108,7 @@ function validate_idShouldBeTrimmed(errors, id) {
 }
 
 function validate_messageShouldBeTrimmed(errors, msg) {
-    if (msg.trim() !== msg) {
+    if (msg.trim() !== msg && msg.trim() !== '') {
         errors.push(`Messages should not start or end with whitespaces`);
     }
 }
