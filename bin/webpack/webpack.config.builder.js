@@ -24,7 +24,11 @@ function buildConfig(mode = 'development') {
         },
         optimization: {
             minimize: useMinify,
-        }
+        },
+        node: {
+            fs: 'empty'
+        },
+        target: 'node'
     };
 }
 

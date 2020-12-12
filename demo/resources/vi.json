@@ -1,6 +1,5 @@
 {
-  "choosing_number_of_days{numOfDaysd}": "Đang chọn: :numOfDays ngày",
-  "choosing_number_of_days_preset{numOfDays}": "Đang chọn: :numOfDays ngày (:presetName)",
-  " Hello ": "Xin chào  ",
-  "ggggggggggggggggggggggggggggg": "gggggggggggggggggggggggggggggggggg"
+  "": "",
+  "choosing_number_of_days{numOfDays}": "choosing_number_of_days{numOfDays}",
+  "Hello:gender(SELECT, *[m]ale[,] [*]*  Mr., *femal[f]e* [ ][Ms.][,,,[))])**], [,]) :name": "Hello:gender(SELECT, *[m]ale[,] [*]*  Mr., *femal[f]e* [ ][Ms.][,,,[))])**], [,]) :name"
 }

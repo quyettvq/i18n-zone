@@ -1,7 +1,7 @@
-import {I18nZoneResource} from "./I18nZoneResource";
-import {I18nZoneResources} from "./I18nZoneResources";
+import I18nZoneResource from "./I18nZoneResource";
+import I18nZoneResources from "./I18nZoneResources";
 
-export interface I18nZoneSettings {
+export default interface I18nZoneSettings {
     setLocale(locale: string): void,
 
     getLocale(): string,

@@ -23,3 +23,9 @@ module.exports.settings = i18n.settings;
  * @type {I18nZoneValidator}
  */
 module.exports.validator = i18n.validator;
+
+/**
+ *
+ * @type {I18nZoneCollector}
+ */
+module.exports.collector = i18n.collector;
